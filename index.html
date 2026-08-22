@@ -117,7 +117,7 @@
         flex: 1;
     }
 
-    /* Table Container (Fluid block without force scroll) */
+    /* Table Container */
     .table-responsive-card {
         width: 100%;
         max-width: 100%;
@@ -304,6 +304,11 @@
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
 
+    /* Strict specificity rules for detail row toggling to work on mobile & desktop */
+    tr.ps-detail-row[style*="display: none"] {
+        display: none !important;
+    }
+
     /* MOBILE CARD TRANSFORMATIONS (< 768px Phones & Tablets) */
     @media (max-width: 767.98px) {
         body {
@@ -339,7 +344,7 @@
             width: 100% !important;
         }
 
-        /* Main Row turns into a beautiful standalone Mobile Card */
+        /* Main Row turns into a standalone Mobile Card */
         #dataTablePS tr.ps-main-row {
             display: block !important;
             width: 100% !important;
@@ -360,7 +365,6 @@
             text-align: left !important;
         }
 
-        /* Serial number floating badge on mobile card top right */
         #dataTablePS tr.ps-main-row td:first-child {
             display: inline-block !important;
             width: auto !important;
@@ -403,10 +407,14 @@
             padding: 8px 10px !important;
         }
 
-        /* Detail Row as a Block Container */
+        /* Detail Row Container on Mobile */
         #dataTablePS tr.ps-detail-row {
-            display: block !important;
             width: 100% !important;
+            box-sizing: border-box;
+        }
+
+        #dataTablePS tr.ps-detail-row:not([style*="display: none"]) {
+            display: block !important;
         }
 
         #dataTablePS tr.ps-detail-row > td {
@@ -515,7 +523,6 @@
 
     <!-- Controls Panel -->
     <div class="ps-controls-panel">
-        <!-- Row 1: Filters & Search -->
         <div class="row align-items-center">
             <div class="col-lg-6 col-12 mb-2 mb-lg-0">
                 <div class="d-flex align-items-center flex-wrap gap-2" style="gap: 6px;">
@@ -555,7 +562,6 @@
             </div>
         </div>
 
-        <!-- Row 2: Action Buttons -->
         <div class="d-flex align-items-center flex-wrap gap-2 pt-2" style="gap: 6px; border-top: 1px solid #f1f5f9;">
             <button type="button" class="btn btn-outline-primary ps-action-btn" id="btnExpandAllMain" onclick="toggleAllRows(true)">
                 <i class="fa fa-plus-square-o"></i> Expand All
@@ -572,7 +578,7 @@
         </div>
     </div>
 
-    <!-- Table / Mobile Card Container -->
+    <!-- Table Container -->
     <div class="table-responsive-card">
         <table class="table" id="dataTablePS">
             <thead>
@@ -36059,12 +36065,12 @@ function toggleSingleRow(psId, event) {
     var btn = mainRow.find('.btn-toggle-row');
 
     if (detailRow.is(':visible')) {
-        detailRow.slideUp(200);
+        detailRow.hide();
         btn.find('.icon-arrow').removeClass('fa-chevron-up').addClass('fa-chevron-down');
         btn.find('.btn-text').text('Expand Details');
         btn.removeClass('btn-secondary').addClass('btn-outline-primary');
     } else {
-        detailRow.slideDown(200);
+        detailRow.show();
         btn.find('.icon-arrow').removeClass('fa-chevron-down').addClass('fa-chevron-up');
         btn.find('.btn-text').text('Collapse Details');
         btn.removeClass('btn-outline-primary').addClass('btn-secondary');
@@ -36079,12 +36085,12 @@ function toggleAllRows(expand) {
             var btn = $(this).find('.btn-toggle-row');
 
             if (expand) {
-                detailRow.slideDown(200);
+                detailRow.show();
                 btn.find('.icon-arrow').removeClass('fa-chevron-down').addClass('fa-chevron-up');
                 btn.find('.btn-text').text('Collapse Details');
                 btn.removeClass('btn-outline-primary').addClass('btn-secondary');
             } else {
-                detailRow.slideUp(200);
+                detailRow.hide();
                 btn.find('.icon-arrow').removeClass('fa-chevron-up').addClass('fa-chevron-down');
                 btn.find('.btn-text').text('Expand Details');
                 btn.removeClass('btn-secondary').addClass('btn-outline-primary');
@@ -36164,7 +36170,8 @@ function applyFilterAndSearch() {
         var pair = matchingRows[i];
         if (i >= startIdx && i < endIdx) {
             pair.main.show();
-            if (pair.main.find('.btn-toggle-row .btn-text').text() === 'Collapse Details') {
+            var isExpanded = pair.main.find('.btn-toggle-row .btn-text').text() === 'Collapse Details';
+            if (isExpanded) {
                 pair.detail.show();
             } else {
                 pair.detail.hide();
