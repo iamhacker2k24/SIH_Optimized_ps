@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
     <title>Smart India Hackathon - Problem Statements Directory</title>
 
     <!-- Dependencies -->
@@ -14,14 +14,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-    body {
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
         font-family: 'Poppins', sans-serif;
         background-color: #f8fafc;
         color: #334155;
-        padding-top: 20px;
+        padding-top: 15px;
         padding-bottom: 40px;
     }
 
+    .container-fluid {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    /* Preloader Overlay */
     .preloader-spinner {
         width: 65px;
         height: 65px;
@@ -41,12 +52,13 @@
         50% { transform: scale(1.25); }
     }
 
+    /* Dashboard Header */
     .ps-dashboard-header {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         color: #ffffff;
-        padding: 22px 26px;
+        padding: 20px;
         border-radius: 12px;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
     }
 
@@ -55,86 +67,82 @@
         backdrop-filter: blur(8px);
         border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 8px;
-        padding: 10px 18px;
+        padding: 8px 14px;
         text-align: center;
-        min-width: 110px;
+        flex: 1;
+        min-width: 90px;
     }
 
     .ps-stat-value {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 800;
         line-height: 1.2;
     }
 
     .ps-stat-label {
-        font-size: 11px;
+        font-size: 10.5px;
         text-transform: uppercase;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.5px;
         opacity: 0.85;
     }
 
+    /* Controls Panel */
     .ps-controls-panel {
         background: #ffffff;
         border: 1px solid #cbd5e1;
         border-radius: 10px;
-        padding: 16px 20px;
-        margin-bottom: 20px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
         gap: 12px;
     }
 
     .ps-filter-btn {
         border-radius: 20px;
         font-weight: 600;
-        font-size: 12px;
-        padding: 6px 16px;
+        font-size: 11.5px;
+        padding: 6px 12px;
         transition: all 0.2s ease;
+        flex: 1;
     }
 
     .ps-action-btn {
         border-radius: 6px;
         font-weight: 600;
-        font-size: 12px;
-        padding: 6px 14px;
+        font-size: 11.5px;
+        padding: 6px 12px;
         transition: all 0.2s ease;
+        flex: 1;
     }
 
+    /* Table Container (Fluid block without force scroll) */
     .table-responsive-card {
         width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        border-radius: 10px;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
     #dataTablePS {
+        width: 100%;
+        max-width: 100%;
         border-collapse: separate !important;
         border-spacing: 0;
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        width: 100%;
-        min-width: 750px;
     }
 
     #dataTablePS thead th {
         background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%) !important;
         color: #f8fafc !important;
         font-weight: 700 !important;
-        font-size: 13px !important;
+        font-size: 12.5px !important;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        padding: 14px 14px !important;
+        padding: 12px 10px !important;
         border: none !important;
-    }
-
-    /* CSS Performance Optimizations */
-    .ps-main-row, .ps-detail-row {
-        content-visibility: auto;
-        contain-intrinsic-size: 80px;
     }
 
     .ps-main-row {
@@ -162,7 +170,7 @@
         display: inline-flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
     }
 
@@ -171,9 +179,9 @@
         color: #3730a3 !important;
         border: 1px solid #c7d2fe;
         font-weight: 600;
-        padding: 5px 11px;
+        padding: 4px 10px;
         border-radius: 12px;
-        font-size: 11.5px;
+        font-size: 11px;
     }
 
     .badge-cat-hardware {
@@ -181,17 +189,17 @@
         color: #115e59 !important;
         border: 1px solid #99f6e4;
         font-weight: 600;
-        padding: 5px 11px;
+        padding: 4px 10px;
         border-radius: 12px;
-        font-size: 11.5px;
+        font-size: 11px;
     }
 
     .badge-ps-id {
         background: #0284c7;
         color: #ffffff;
         font-weight: 700;
-        font-size: 12px;
-        padding: 5px 11px;
+        font-size: 11.5px;
+        padding: 4px 10px;
         border-radius: 6px;
     }
 
@@ -200,19 +208,15 @@
         color: #334155;
         border: 1px solid #cbd5e1;
         font-weight: 600;
-        padding: 5px 11px;
+        padding: 4px 10px;
         border-radius: 6px;
-        font-size: 11.5px;
+        font-size: 11px;
     }
 
-    .action-status-cell {
-        padding: 12px 16px !important;
-    }
-
-    .btn-toggle-row {
+    .btn-toggle-row, .btn-read-toggle {
         font-weight: 600 !important;
-        font-size: 13px !important;
-        padding: 7px 16px !important;
+        font-size: 12px !important;
+        padding: 6px 14px !important;
         border-radius: 6px !important;
         box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         display: inline-flex;
@@ -222,25 +226,17 @@
     }
 
     .btn-read-toggle {
-        font-weight: 600 !important;
-        font-size: 13px !important;
-        padding: 7px 16px !important;
         border-radius: 20px !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
     }
 
     .btn-copy-icon {
         background: transparent;
         border: none;
         color: #64748b;
-        padding: 2px 6px;
+        padding: 2px 5px;
         border-radius: 4px;
         cursor: pointer;
-        font-size: 12px;
+        font-size: 11.5px;
         transition: all 0.15s ease;
         display: inline-flex;
         align-items: center;
@@ -254,9 +250,9 @@
 
     .btn-copy-btn {
         border-radius: 6px;
-        font-size: 11.5px;
+        font-size: 11px;
         font-weight: 600;
-        padding: 3px 10px;
+        padding: 3px 8px;
         transition: all 0.15s ease;
     }
 
@@ -269,38 +265,37 @@
         border: 1px solid #cbd5e1;
         border-left: 5px solid #0284c7;
         border-radius: 10px;
-        padding: 22px;
-        margin: 6px 0 14px 0;
+        padding: 18px;
+        margin: 6px 0 12px 0;
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
     }
 
     .ps-detail-title {
-        font-size: 16.5px;
+        font-size: 15.5px;
         font-weight: 700;
         color: #0f172a;
         line-height: 1.45;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .ps-desc-container {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
         border-radius: 8px;
-        padding: 18px;
+        padding: 14px;
         max-height: 340px;
         overflow-y: auto;
-        font-size: 13.5px;
-        line-height: 1.7;
+        font-size: 13px;
+        line-height: 1.65;
         color: #334155;
     }
 
-    /* Pagination Footer */
     .ps-pagination-bar {
         background: #ffffff;
         border: 1px solid #cbd5e1;
         border-radius: 10px;
-        padding: 14px 20px;
-        margin-top: 20px;
+        padding: 12px 16px;
+        margin-top: 16px;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -309,32 +304,133 @@
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
 
-    .pagination .page-item .page-link {
-        color: #0284c7;
-        font-weight: 600;
-        border-radius: 6px;
-        margin: 0 2px;
-    }
+    /* MOBILE CARD TRANSFORMATIONS (< 768px Phones & Tablets) */
+    @media (max-width: 767.98px) {
+        body {
+            padding-top: 10px;
+            padding-bottom: 25px;
+        }
 
-    .pagination .page-item.active .page-link {
-        background-color: #0284c7;
-        border-color: #0284c7;
-        color: #ffffff;
-    }
+        .ps-dashboard-header {
+            padding: 16px;
+            text-align: center;
+        }
 
-    @media (max-width: 991px) {
-        .ps-dashboard-header { padding: 18px; text-align: center; }
-        .ps-dashboard-header .d-flex { justify-content: center !important; margin-top: 14px; }
-        .ps-controls-panel { flex-direction: column; align-items: stretch; }
-        .ps-controls-panel > div { justify-content: center !important; width: 100%; }
-        .input-group { width: 100% !important; }
-    }
+        .ps-dashboard-header .d-flex {
+            justify-content: center !important;
+            margin-top: 12px;
+            width: 100%;
+        }
 
-    @media (max-width: 576px) {
-        .ps-stat-card { min-width: 85px; padding: 6px 10px; }
-        .ps-stat-value { font-size: 18px; }
-        .ps-stat-label { font-size: 10px; }
-        .btn-toggle-row, .btn-read-toggle { width: 100%; margin-bottom: 4px; }
+        /* Convert Table elements to Block Cards on mobile */
+        #dataTablePS {
+            display: block !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+        }
+
+        #dataTablePS thead {
+            display: none !important;
+        }
+
+        #dataTablePS tbody {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        /* Main Row turns into a beautiful standalone Mobile Card */
+        #dataTablePS tr.ps-main-row {
+            display: block !important;
+            width: 100% !important;
+            background: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 10px !important;
+            margin-bottom: 12px !important;
+            padding: 14px !important;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+            position: relative;
+        }
+
+        #dataTablePS tr.ps-main-row td {
+            display: block !important;
+            width: 100% !important;
+            border: none !important;
+            padding: 4px 0 !important;
+            text-align: left !important;
+        }
+
+        /* Serial number floating badge on mobile card top right */
+        #dataTablePS tr.ps-main-row td:first-child {
+            display: inline-block !important;
+            width: auto !important;
+            background: #e2e8f0;
+            color: #475569;
+            font-size: 11px;
+            padding: 2px 8px !important;
+            border-radius: 12px;
+            margin-bottom: 6px;
+        }
+
+        #dataTablePS tr.ps-main-row td:first-child::before {
+            content: "S.No: #";
+        }
+
+        .ps-meta-box {
+            width: 100% !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 6px !important;
+            margin-top: 6px;
+        }
+
+        .action-status-cell {
+            padding-top: 10px !important;
+            border-top: 1px dashed #e2e8f0 !important;
+            margin-top: 8px !important;
+        }
+
+        .action-status-cell .d-flex {
+            flex-direction: row !important;
+            gap: 8px !important;
+            width: 100% !important;
+        }
+
+        .btn-toggle-row, .btn-read-toggle {
+            flex: 1 !important;
+            width: 100% !important;
+            font-size: 11.5px !important;
+            padding: 8px 10px !important;
+        }
+
+        /* Detail Row as a Block Container */
+        #dataTablePS tr.ps-detail-row {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        #dataTablePS tr.ps-detail-row > td {
+            display: block !important;
+            width: 100% !important;
+            padding: 0 !important;
+            border: none !important;
+        }
+
+        .ps-detail-card {
+            margin: 0 0 16px 0 !important;
+            border-radius: 10px !important;
+            padding: 14px !important;
+        }
+
+        .ps-pagination-bar {
+            flex-direction: column !important;
+            text-align: center !important;
+        }
+
+        .pagination {
+            justify-content: center !important;
+            width: 100% !important;
+        }
     }
     </style>
 </head>
@@ -357,10 +453,10 @@
     transition: opacity 0.6s ease, visibility 0.6s ease;
 ">
     <div class="preloader-spinner mb-4"></div>
-    <h2 style="font-weight: 800; font-size: 26px; letter-spacing: -0.5px; margin-bottom: 6px; color: #f8fafc; text-align: center;">
+    <h2 style="font-weight: 800; font-size: 24px; letter-spacing: -0.5px; margin-bottom: 6px; color: #f8fafc; text-align: center;">
         Smart India Hackathon
     </h2>
-    <p style="font-size: 14px; opacity: 0.85; margin-bottom: 20px; text-align: center; color: #38bdf8; font-weight: 600;">
+    <p style="font-size: 13.5px; opacity: 0.85; margin-bottom: 20px; text-align: center; color: #38bdf8; font-weight: 600;">
         Problem Statement Directory
     </p>
 
@@ -368,15 +464,15 @@
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        padding: 10px 24px;
+        padding: 9px 20px;
         border-radius: 30px;
-        font-size: 13.5px;
+        font-size: 12.5px;
         font-weight: 600;
         letter-spacing: 0.4px;
         color: #f1f5f9;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     ">
         <i class="fa fa-code text-info" style="color: #38bdf8 !important;"></i> Created by Dev 
@@ -385,28 +481,28 @@
     </div>
 </div>
 
-<div class="container-fluid px-md-5">
+<div class="container-fluid">
 
     <!-- Dashboard Header -->
     <div class="ps-dashboard-header">
         <div class="row align-items-center">
-            <div class="col-md-7">
-                <h3 style="margin: 0; font-weight: 800; font-size: 24px; letter-spacing: -0.5px;">
+            <div class="col-md-7 text-center text-md-left mb-3 mb-md-0">
+                <h3 style="margin: 0; font-weight: 800; font-size: 22px; letter-spacing: -0.5px;">
                     <i class="fa fa-cubes text-primary mr-2" style="color: #38bdf8 !important;"></i>Problem Statements Directory
                 </h3>
-                <p style="margin: 6px 0 0 0; opacity: 0.85; font-size: 13px;">
-                    High-performance optimized dashboard with pagination, instant live search, and status filters.
+                <p style="margin: 4px 0 0 0; opacity: 0.85; font-size: 12.5px;">
+                    Mobile-responsive directory with search, status filters, and copy functionality.
                 </p>
             </div>
             <div class="col-md-5">
-                <div class="d-flex justify-content-end gap-2" style="gap: 12px;">
+                <div class="d-flex justify-content-center justify-content-md-end gap-2" style="gap: 10px;">
                     <div class="ps-stat-card">
                         <div class="ps-stat-value" id="statTotalCount">226</div>
-                        <div class="ps-stat-label">Total Statements</div>
+                        <div class="ps-stat-label">Total</div>
                     </div>
                     <div class="ps-stat-card" style="background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4);">
                         <div class="ps-stat-value text-success" id="statReadCount" style="color: #4ade80 !important;">0</div>
-                        <div class="ps-stat-label">Marked Read</div>
+                        <div class="ps-stat-label">Read</div>
                     </div>
                     <div class="ps-stat-card" style="background: rgba(245, 158, 11, 0.2); border-color: rgba(245, 158, 11, 0.4);">
                         <div class="ps-stat-value text-warning" id="statUnreadCount" style="color: #fbbf24 !important;">226</div>
@@ -419,40 +515,48 @@
 
     <!-- Controls Panel -->
     <div class="ps-controls-panel">
-        <div class="d-flex align-items-center flex-wrap gap-2" style="gap: 8px;">
-            <span style="font-weight: 700; font-size: 13px; color: #475569; margin-right: 4px;">
-                <i class="fa fa-filter text-info"></i> Status:
-            </span>
-            <button type="button" class="btn btn-primary ps-filter-btn active" id="btnFilterAll" onclick="filterReadStatus('all')">
-                All (226)
-            </button>
-            <button type="button" class="btn btn-outline-warning ps-filter-btn" id="btnFilterUnread" onclick="filterReadStatus('unread')">
-                <i class="fa fa-circle-o"></i> Unread Only
-            </button>
-            <button type="button" class="btn btn-outline-success ps-filter-btn" id="btnFilterRead" onclick="filterReadStatus('read')">
-                <i class="fa fa-check-circle"></i> Read Only
-            </button>
+        <!-- Row 1: Filters & Search -->
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-12 mb-2 mb-lg-0">
+                <div class="d-flex align-items-center flex-wrap gap-2" style="gap: 6px;">
+                    <span style="font-weight: 700; font-size: 12.5px; color: #475569; margin-right: 4px;">
+                        <i class="fa fa-filter text-info"></i> Status:
+                    </span>
+                    <button type="button" class="btn btn-primary ps-filter-btn active" id="btnFilterAll" onclick="filterReadStatus('all')">
+                        All (226)
+                    </button>
+                    <button type="button" class="btn btn-outline-warning ps-filter-btn" id="btnFilterUnread" onclick="filterReadStatus('unread')">
+                        <i class="fa fa-circle-o"></i> Unread
+                    </button>
+                    <button type="button" class="btn btn-outline-success ps-filter-btn" id="btnFilterRead" onclick="filterReadStatus('read')">
+                        <i class="fa fa-check-circle"></i> Read
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="d-flex align-items-center justify-content-lg-end flex-wrap gap-2" style="gap: 8px;">
+                    <div class="d-flex align-items-center mr-1">
+                        <span style="font-size: 11.5px; font-weight: 600; color: #64748b; margin-right: 4px;">Show:</span>
+                        <select id="selectPageSize" class="custom-select custom-select-sm" onchange="changePageSize(this.value)" style="width: 75px; font-weight: 600;">
+                            <option value="20" selected>20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="all">All</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group input-group-sm flex-grow-1" style="max-width: 240px;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white border-right-0"><i class="fa fa-search text-muted"></i></span>
+                        </div>
+                        <input type="text" id="inputPsSearch" class="form-control border-left-0" placeholder="Search statements..." onkeyup="performSearch()">
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="d-flex align-items-center flex-wrap gap-2" style="gap: 8px;">
-            <!-- Items Per Page Selector -->
-            <div class="d-flex align-items-center mr-2">
-                <span style="font-size: 12px; font-weight: 600; color: #64748b; margin-right: 6px;">Show:</span>
-                <select id="selectPageSize" class="custom-select custom-select-sm" onchange="changePageSize(this.value)" style="width: 80px; font-weight: 600;">
-                    <option value="20" selected>20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="all">All</option>
-                </select>
-            </div>
-
-            <div class="input-group input-group-sm" style="width: 200px;">
-                <div class="input-group-prepend">
-                    <span class="input-group-text bg-white border-right-0"><i class="fa fa-search text-muted"></i></span>
-                </div>
-                <input type="text" id="inputPsSearch" class="form-control border-left-0" placeholder="Search statements..." onkeyup="performSearch()">
-            </div>
-
+        <!-- Row 2: Action Buttons -->
+        <div class="d-flex align-items-center flex-wrap gap-2 pt-2" style="gap: 6px; border-top: 1px solid #f1f5f9;">
             <button type="button" class="btn btn-outline-primary ps-action-btn" id="btnExpandAllMain" onclick="toggleAllRows(true)">
                 <i class="fa fa-plus-square-o"></i> Expand All
             </button>
@@ -468,9 +572,9 @@
         </div>
     </div>
 
-    <!-- Table Container -->
+    <!-- Table / Mobile Card Container -->
     <div class="table-responsive-card">
-        <table class="table table-striped table-bordered" id="dataTablePS" style="width:100%">
+        <table class="table" id="dataTablePS">
             <thead>
                 <tr>
                     <th style="width: 5%; text-align: center;">S.No.</th>
@@ -35794,7 +35898,7 @@
 
     <!-- Pagination Bar -->
     <div class="ps-pagination-bar" id="paginationBar">
-        <div id="paginationInfo" style="font-size: 13px; font-weight: 600; color: #475569;">
+        <div id="paginationInfo" style="font-size: 12.5px; font-weight: 600; color: #475569;">
             Showing 1 to 20 of 226 entries
         </div>
         <ul class="pagination pagination-sm m-0" id="paginationNav">
@@ -35804,7 +35908,7 @@
 
 </div>
 
-<!-- High-Performance JavaScript Controls with Pagination -->
+<!-- JavaScript Controls -->
 <script>
 var READ_STORAGE_KEY = 'sih_read_problem_statements_v1';
 var currentFilter = 'all';
